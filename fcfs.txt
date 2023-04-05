@@ -1,0 +1,38 @@
+# Program for FCFS
+n = int(input("Enter the number of processes: "))
+bt = []
+at = []
+tat = []
+wt = []
+complt = 0
+avgtat = 0
+avgwt = 0
+totaltat = 0
+totalwt = 0
+
+# Input burst time for each process
+for i in range(n):
+    bt.append(int(input("Burst time of process-{}: ".format(i+1))))
+    at.append(0) # set arrival time to zero for all process
+
+# Calculate TAT
+for i in range(n):
+    complt = complt + bt[i]
+    tat.append(complt - at[i])
+    totaltat = totaltat + tat[i]
+
+avgtat = float(totaltat/n)
+
+# Calculate waiting time
+for i in range(n):
+    wt.append(tat[i] - bt[i])
+    totalwt = totalwt + wt[i]
+
+avgwt = float(totalwt/n)
+
+print("ProcessNo\tBurst_time\tWait_time\tTurnaround_time")
+for i in range(n):
+    print("{}\t\t\t{}\t\t\t{}\t\t\t{}".format(i+1, bt[i], wt[i], tat[i]))
+    print("\n")
+
+print("Average waiting time and turnaround time is {} and {}".format(avgwt, avgtat))
